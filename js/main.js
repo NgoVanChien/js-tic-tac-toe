@@ -1,3 +1,15 @@
+import {
+  getCellElementAtIdx,
+  getCellElementList,
+  getCurrentTurnElement,
+  getGameStatusElement,
+} from "./selectors.js";
+
+console.log(getCellElementList());
+console.log(getCurrentTurnElement());
+console.log(getGameStatusElement());
+console.log(getCellElementAtIdx(4));
+
 /**
  * Global variables
  */
