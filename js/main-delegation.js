@@ -2,15 +2,16 @@ import { CELL_VALUE, GAME_STATUS, TURN } from "./constants.js";
 import {
   getCellElementAtIdx,
   getCellElementList,
+  getCellListElement,
   getCurrentTurnElement,
   getGameStatusElement,
   getRePlayButtonElement,
 } from "./selectors.js";
 import { checkGameStatus } from "./utils.js";
 
-console.log(checkGameStatus(["X", "O", "O", "", "X", "", "", "O", "X"]));
-console.log(checkGameStatus(["X", "O", "X", "X", "O", "X", "O", "X", "O"]));
-console.log(checkGameStatus(["X", "O", "X", "X", "O", "X", "O", "X", ""]));
+// console.log(checkGameStatus(["X", "O", "O", "", "X", "", "", "O", "X"]));
+// console.log(checkGameStatus(["X", "O", "X", "X", "O", "X", "O", "X", "O"]));
+// console.log(checkGameStatus(["X", "O", "X", "X", "O", "X", "O", "X", ""]));
 
 // console.log(getCellElementList());
 // console.log(getCurrentTurnElement());
@@ -109,15 +110,26 @@ function handleCellClick(cell, index) {
 }
 
 function initCellElementList() {
-  const cellElementList = getCellElementList();
-  cellElementList.forEach((cell, index) => {
-    cell.addEventListener("click", () => handleCellClick(cell, index));
+  // set index for each li element
+  const liList = getCellElementList();
+  liList.forEach((cell, index) => {
+    // cell.addEventListener("click", () => handleCellClick(cell, index));
+    cell.dataset.idx = index;
   });
+
+  // attach event click for ul element
+  const ulElement = getCellListElement();
+  if (ulElement) {
+    ulElement.addEventListener("click", (event) => {
+      if (event.target.tagName !== "LI") return;
+
+      const index = Number.parseInt(event.target.dataset.idx);
+      handleCellClick(event.target, index);
+    });
+  }
 }
 
 function resetGame() {
-  console.log("click replay button");
-
   // --- reset temp global var ---
   currentTurn = TURN.CROSS;
   gameStatus = GAME_STATUS.PLAYING;

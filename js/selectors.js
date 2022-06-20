@@ -3,6 +3,7 @@
 // 2. Current Turn
 // 3. Replay Game
 // 4. Game status
+
 export function getCellElementList() {
   return document.querySelectorAll("#cellList > li");
 }
@@ -17,4 +18,12 @@ export function getCellElementAtIdx(index) {
 
 export function getGameStatusElement() {
   return document.getElementById("gameStatus");
+}
+
+export function getRePlayButtonElement() {
+  return document.getElementById("replayGame");
+}
+
+export function getCellListElement() {
+  return document.getElementById("cellList");
 }
